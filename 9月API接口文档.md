@@ -28,9 +28,9 @@
     "data": []
 }
 ``` 
-###2.用户注册
+###2.用户接口
 ###### URL
-> [www.domain/user/register]([www.dmomain/user/register)
+> [www.domain/user/auth]([www.dmomain/user/register)
 
 ###### 支持格式
 > JSON
@@ -42,6 +42,13 @@
 > |参数|必选|类型|说明|
 |:-----  |:-------|:-----|-----                               |
 |time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|type   |true    |int   |0 用户注册 1 用户登录 2 设置昵称 3 修改密码 4 web确认登录状态 5 绑定邮箱 6 忘记密码 7 App刷新token接口 8 Token认证接口(自动登录接口) 9 退出登录|
+
+####1.用户注册（type=0）
+###### 请求参数
+> |参数|必选|类型|说明|
+|:-----  |:-------|:-----|-----                               |
+             |
 |username    |ture    |string|用户手机号                          |
 |password   |true    |string   |用户密码（暂时MD5加密传输）|
 |code   |true    |int   |用户收到的验证码|
@@ -54,20 +61,10 @@
     "data": []
 }
 ``` 
-###3.用户登录
-###### URL
-> [www.domain/user/login]([www.dmomain/user/login)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###2.用户登录（type=1）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |username    |ture    |string|用户手机号                          |
 |password   |true    |string   |用户密码（暂时MD5加密传输）|
 |rember   |false    |int  |用户是否想自动登录,自动登录rember参数存在|
@@ -89,20 +86,10 @@
     }
 }
 ``` 
-###4.确认用户登录状态（自动登录，判断用户是否登录）
-###### URL
-> [www.domain/user/check_login]([www.dmomain/user/check_login)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###3.确认用户登录状态（自动登录，判断用户是否登录）（type=4）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |token   |true    |string  |确定来访者身份|
 |uuid   |true    |string  |用户登录表示，若用户第一次登录为空|
 
@@ -126,20 +113,10 @@
     }
 }
 ``` 
-###5.用户修改密码
-###### URL
-> [www.domain/user/change_pwd]([www.dmomain/user/change_pwd)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###4.用户修改密码（type=3）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |token   |true    |string  |确定来访者身份|
 |username    |ture    |string|用户手机号                          |
 |ex_password   |true    |string   |用户原密码（暂时MD5加密传输）|
@@ -155,20 +132,10 @@
     "data": []
 }
 ``` 
-###6.用户找回密码
-###### URL
-> [www.domain/user/find_pwd]([www.dmomain/user/find_pwd)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###5.用户找回密码（type=6）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |token   |true    |string  |确定来访者身份|
 |username    |ture    |string|用户手机号                          |
 |password   |true    |string   |用户新密码（暂时MD5加密传输）|
@@ -184,20 +151,10 @@
 }
 ``` 
 
-###7.用户修改昵称
-###### URL
-> [www.domain/user/nickname]([www.dmomain/user/nickname)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###6.用户修改昵称（type=2）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |token   |true    |string  |确定来访者身份|
 |uuid    |ture    |string|用户id标识                      |
 |nickname  |true    |string  |用户昵称|
@@ -212,20 +169,10 @@
 ``` 
 
 
-###8.用户绑定邮箱
-###### URL
-> [www.domain/user/bind_email]([www.dmomain/user/bind_email)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###7.用户绑定邮箱（type=5）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |             |
 |token   |true    |string  |确定来访者身份|
 |uuid   |ture    |string|用户id标识     
 |code    |ture    |int|验证码                         |
@@ -241,20 +188,10 @@
 }
 ``` 
 
-###9.用户退出登录
-###### URL
-> [www.domain/user/logout]([www.dmomain/user/logout)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###8.用户退出登录（type=9）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |                |
 |token   |true    |string  |确定来访者身份|
 |uuid    |ture    |string|用户登录标识    |
 
@@ -267,52 +204,10 @@
     "data": []
 }
 ``` 
-###10.app登录接口(获取token)
-###### URL
-> [www.domain/user/get_app_token]([www.dmomain/user/get_app_token)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###9.app刷新token登录令牌（type=7）
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
-|token   |true    |string  |登录认证令牌，第一次登录为空|
-|username    |ture    |string|用户手机号                          |
-|password   |true    |string   |用户密码（暂时MD5加密传输）|
-
-
-###### 接口示例
-``` javascript
-{
-    "code": "200",
-    "msg": "用户登录成功！",
-    "data": {
-        "app_token": "b4944ae017b1cd615679e11daeb321ef",
-        "expire_in": 1553174465,
-        "refresh_token": "17f2b618d67c0f089d32158326aa2214",
-        "uuid": "M8Cq4iF9s2Eb4Lp3eR6q",
-    }
-}
-``` 
-###11.app刷新token登录令牌
-###### URL
-> [www.domain/user/refur_app_token]([www.dmomain/user/refur_app_token)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
-###### 请求参数
-> |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |              |
 |username    |ture    |string|用户手机号                          |
 |refresh_token   |true    |string   |用户刷新token令牌|
 |uuid    |ture    |string|用户id标识                      |
@@ -330,20 +225,10 @@
     }
 }
 ``` 
-###12.token认证接口(自动登录)
-###### URL
-> [www.domain/user/check_app_token]([www.dmomain/user/check_app_token)
-
-###### 支持格式
-> JSON
-
-###### HTTP请求方式
-> POST
-
+###10.token认证接口(自动登录 type=8)
 ###### 请求参数
 > |参数|必选|类型|说明|
-|:-----  |:-------|:-----|-----                               |
-|time   |ture    |int|当前时间戳(用于判断请求是否超时                          |
+|:-----  |:-------|:-----|-----                               |                   |
 |token   |true    |string  |确定来访者身份|
 |username    |ture    |string|用户手机号                          |
 |uuid    |ture    |string|用户id标识                      |
@@ -358,7 +243,7 @@
     "data": []
 }
 ```
-###13.搜索接口
+###3.搜索接口
 ###### URL
 > [www.domain/user/research]([www.dmomain/user/research)
 
